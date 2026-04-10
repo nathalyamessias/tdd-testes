@@ -50,3 +50,14 @@ export function addTask(tasks, title) {
   const newTask = createTask(title);
   return [...tasks, newTask];
 }
+
+// ------------------------------------------------------------
+// Alteração de estado
+// ------------------------------------------------------------
+
+export function toggleTask(task) {
+  return {
+    ...task, // Copia todas as propriedades originais (id, title)
+    completed: !task.completed, // Sobrescreve apenas o completed invertendo o valor atual
+  };
+}
