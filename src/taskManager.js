@@ -61,3 +61,13 @@ export function toggleTask(task) {
     completed: !task.completed, // Sobrescreve apenas o completed invertendo o valor atual
   };
 }
+
+// ------------------------------------------------------------
+// Remoção
+// ------------------------------------------------------------
+
+export function removeTask(tasks, taskId) {
+  // O .filter() já retorna um NOVO array, garantindo a imutabilidade
+  return tasks.filter((task) => task.id !== taskId);
+}
+
