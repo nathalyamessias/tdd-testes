@@ -1,0 +1,25 @@
+{
+  "name": "tdd-testes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": { 
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathalyamessias/tdd-testes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nathalyamessias/tdd-testes/issues"
+  },
+  "homepage": "https://github.com/nathalyamessias/tdd-testes#readme",
+  "devDependencies": {
+    "vitest": "^4.1.4"
+  }
+}
