@@ -48,9 +48,14 @@ export function addTask(tasks, title) {
     );
   }
 
+  if (isDuplicate(tasks, title)) {
+    throw new Error('Tarefa duplicada: já existe uma tarefa com este título.');
+  }
+
   const newTask = createTask(title);
   return [...tasks, newTask];
 }
+
 
 // ------------------------------------------------------------
 // Alteração de estado
@@ -120,6 +125,19 @@ export function filterByPriority(tasks, priority) {
   // Retorna um novo array contendo apenas as tarefas que tem a prioridade pedida
   return tasks.filter((task) => task.priority === priority);
 }
+
+// ------------------------------------------------------------
+// Validação de Duplicatas
+// ------------------------------------------------------------
+
+export function isDuplicate(tasks, title) {
+  // Padroniza o título buscado: remove espaços das pontas e deixa tudo minúsculo
+  const normalizedTitle = title.trim().toLowerCase();
+  
+  // Verifica se alguma tarefa já existente tem o mesmo título padronizado
+  return tasks.some((task) => task.title.toLowerCase() === normalizedTitle);
+}
+
 
 
 
