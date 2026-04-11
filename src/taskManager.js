@@ -28,11 +28,12 @@ export function validateTitle(title) {
 // Criação
 // ------------------------------------------------------------
 
-export function createTask(title) {
+export function createTask(title, priority = 'medium') {
   return {
     id: _nextId++,
     title: title.trim(),
     completed: false,
+    priority: priority, // Adicionando o novo campo aqui
   };
 }
 
@@ -105,5 +106,20 @@ export function countPending(tasks) {
   // Filtra as não concluídas e pega o tamanho do array resultante
   return tasks.filter((task) => task.completed === false).length;
 }
+
+// ------------------------------------------------------------
+// Prioridades
+// ------------------------------------------------------------
+
+export function validatePriority(priority) {
+  // Verifica se o valor passado está dentro do array de prioridades válidas
+  return ['low', 'medium', 'high'].includes(priority);
+}
+
+export function filterByPriority(tasks, priority) {
+  // Retorna um novo array contendo apenas as tarefas que tem a prioridade pedida
+  return tasks.filter((task) => task.priority === priority);
+}
+
 
 
