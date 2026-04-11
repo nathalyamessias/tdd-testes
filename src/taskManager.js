@@ -138,6 +138,21 @@ export function isDuplicate(tasks, title) {
   return tasks.some((task) => task.title.toLowerCase() === normalizedTitle);
 }
 
+// ------------------------------------------------------------
+// Ordenação
+// ------------------------------------------------------------
+
+export function sortTasks(tasks) {
+  // Pega todas as pendentes
+  const pending = tasks.filter((task) => task.completed === false);
+  
+  // Pega todas as concluídas
+  const completed = tasks.filter((task) => task.completed === true);
+  
+  // Retorna um novo array juntando as pendentes primeiro, e as concluídas depois
+  return [...pending, ...completed];
+}
+
 
 
 
