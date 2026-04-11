@@ -153,6 +153,21 @@ export function sortTasks(tasks) {
   return [...pending, ...completed];
 }
 
+// ------------------------------------------------------------
+// Busca
+// ------------------------------------------------------------
+
+export function searchTasks(tasks, query) {
+  // Transforma a busca para minúsculo
+  const lowerQuery = query.toLowerCase();
+  
+  // Filtra as tarefas verificando se o título (em minúsculo) contém a busca
+  return tasks.filter((task) => 
+    task.title.toLowerCase().includes(lowerQuery)
+  );
+}
+
+
 
 
 
