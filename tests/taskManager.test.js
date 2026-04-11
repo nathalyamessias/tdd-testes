@@ -10,6 +10,8 @@ import {
   countTasks,
   countCompleted,
   countPending,
+  validatePriority, 
+  filterByPriority,
 } from '../src/taskManager.js';
 
 // ============================================================
@@ -95,6 +97,17 @@ describe('createTask', () => {
 
     expect(task.title).toBe('Título com espaços');
   });
+
+  it('deve criar uma tarefa com prioridade especificada', () => {
+    const task = createTask('Estudar', 'high');
+    expect(task.priority).toBe('high');
+  });
+
+  it('deve usar prioridade medium como padrão', () => {
+    const task = createTask('Estudar');
+    expect(task.priority).toBe('medium');
+  });
+
 });
 
 // ============================================================
@@ -359,6 +372,52 @@ describe('countPending', () => {
     expect(countPending(allCompleted)).toBe(0);
   });
 });
+
+// ============================================================
+// 8. Prioridades
+// ============================================================
+describe('validatePriority', () => {
+  it('deve retornar true para prioridades válidas', () => {
+    expect(validatePriority('low')).toBe(true);
+    expect(validatePriority('medium')).toBe(true);
+    expect(validatePriority('high')).toBe(true);
+  });
+
+  it('deve retornar false para prioridades inválidas', () => {
+    expect(validatePriority('urgente')).toBe(false);
+    expect(validatePriority('')).toBe(false);
+    expect(validatePriority(null)).toBe(false);
+  });
+});
+
+describe('filterByPriority', () => {
+  let tasks;
+
+  beforeEach(() => {
+    resetId();
+    // Criando algumas tarefas com prioridades diferentes manualmente
+    tasks = [
+      { id: 1, title: 'Tarefa 1', completed: false, priority: 'low' },
+      { id: 2, title: 'Tarefa 2', completed: false, priority: 'high' },
+      { id: 3, title: 'Tarefa 3', completed: false, priority: 'medium' },
+      { id: 4, title: 'Tarefa 4', completed: false, priority: 'high' }
+    ];
+  });
+
+  it('deve retornar apenas tarefas da prioridade especificada', () => {
+    const highTasks = filterByPriority(tasks, 'high');
+    
+    expect(highTasks).toHaveLength(2);
+    expect(highTasks[0].title).toBe('Tarefa 2');
+    expect(highTasks[1].title).toBe('Tarefa 4');
+  });
+
+  it('deve retornar array vazio se não encontrar a prioridade', () => {
+    const lowTasks = filterByPriority([], 'low');
+    expect(lowTasks).toHaveLength(0);
+  });
+});
+
 
 
 
